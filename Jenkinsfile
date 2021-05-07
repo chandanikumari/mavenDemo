@@ -37,7 +37,7 @@
 // }
 
 
-node {    
+agent any {    
       def app
       stage('Build image') {         
        
