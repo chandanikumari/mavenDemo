@@ -1,9 +1,9 @@
 pipeline {
-  environment {
+  //environment {
     //registry = "chandanikumari/test"
     //registryCredential = 'dockerhub'
     //dockerImage = ''
-  }
+  //}
   agent any
   stages {
     /*stage('Java Build') {
