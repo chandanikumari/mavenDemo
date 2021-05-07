@@ -1,21 +1,21 @@
 pipeline {
   environment {
-    registry = "chandanikumari/test"
+    registry = 'chandanikumari/test'
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
   agent any
   stages {
-    stage('Java Build') {
+    /*stage('Java Build') {
             steps {
 		        sh 'cd my-app && mvn package'
 		        sh 'cd my-app && java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App'
             }
-        }
+        }*/
     stage('Building image') {
       steps{
           script {
-          dockerImage = docker.build("my-image:${env.BUILD_ID}")
+          dockerImage = docker.build("chandanikumari/test:${env.BUILD_ID}")
         }
           //  sh 'cd docker && docker build -t registry .'
         }
