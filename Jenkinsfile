@@ -1,8 +1,8 @@
 pipeline {
   environment {
-    registry = "chandanikumari/test"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
+    //registry = "chandanikumari/test"
+    //registryCredential = 'dockerhub'
+    //dockerImage = ''
   }
   agent any
   stages {
@@ -15,7 +15,7 @@ pipeline {
     stage('Building image') {
       steps{
           script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build("chandanikumari/test")
         }
           //  sh 'cd docker && docker build -t registry .'
         }
@@ -24,9 +24,10 @@ pipeline {
     stage('Deploy Image') {
       steps{
           script {
-              docker.withRegistry( '', registryCredential ) {
+              docker.withRegistry( '', 'dockerhub' ) {
                 // def dockerImage = docker.build("test")
                 dockerImage.push()
+                dockerImage.push("latest")
                 }
            // sh 'docker push chandanikumari/test'
           }
