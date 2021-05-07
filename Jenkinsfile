@@ -23,12 +23,10 @@ pipeline {
     
     stage('Deploy Image') {
       steps{
-        script {
-          docker.withRegistry('https://hub.docker.com',registryCredential) {
+          docker.withRegistry('https://hub.docker.com', 'registryCredential') {
                 def dockerImage = docker.build("test")
                 dockerImage.push()
                 }
-            }
            // sh 'docker push chandanikumari/test'
         }
     }      
