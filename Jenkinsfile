@@ -1,10 +1,16 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Java Build') {
             steps {
-		              sh 'cd my-app && mvn package'
-		              sh 'cd my-app && java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App'
+		        sh 'cd my-app && mvn package'
+		        sh 'cd my-app && java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App'
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                sh 'cd docker && docker build -t chandanikumari/test:v1 .'
+                sh 'cd docker && docker push chandanikumari/test'
             }
         }
     }
