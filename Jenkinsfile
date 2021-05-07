@@ -35,18 +35,17 @@
 //     }      
 //   }
 // }
-
-
-agent any {    
-      def app
-      stage('Build image') {         
-       
+pipeline {
+    agent any {    
+        def app
+        stage('Build image') {         
             app = docker.build("chandanikumari/test")    
-       }     
-       stage('Push image') {
-       docker.withRegistry('', 'dockerhub') {            
-       app.push("${env.BUILD_NUMBER}")            
-       app.push("latest")        
-              }    
-           }
+            }     
+        stage('Push image') {
+        docker.withRegistry('', 'dockerhub') {            
+        app.push("${env.BUILD_NUMBER}")            
+        app.push("latest")        
+           }    
         }
+    }
+}
