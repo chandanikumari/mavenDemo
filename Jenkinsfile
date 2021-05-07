@@ -15,7 +15,7 @@ pipeline {
     stage('Building image') {
       steps{
           script {
-          dockerImage = docker.build registry .
+          dockerImage = docker.build("my-image:${env.BUILD_ID}")
         }
           //  sh 'cd docker && docker build -t registry .'
         }
