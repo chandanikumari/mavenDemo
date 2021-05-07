@@ -18,7 +18,7 @@ pipeline {
             sh 'cd docker && docker build -t registry .'
         }
       }
-    }
+    
     stage('Deploy Image') {
       steps{
         script {
