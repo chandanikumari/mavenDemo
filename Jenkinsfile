@@ -1,17 +1,32 @@
 pipeline {
-    agent any
-    stages {
-        stage('Java Build') {
+  environment {
+    registry = "chandanikumari/test"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Java Build') {
             steps {
 		        sh 'cd my-app && mvn package'
 		        sh 'cd my-app && java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App'
             }
         }
-        stage('Docker Build') {
-            steps {
-                sh 'cd docker && sudo docker build -t chandanikumari/test:v1 .'
-                sh 'cd docker && sudo docker push chandanikumari/test'
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+                }
             }
         }
-    }
+    }      
+  }
 }
