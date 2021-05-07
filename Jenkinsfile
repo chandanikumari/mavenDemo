@@ -9,8 +9,8 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'cd docker && docker build -t chandanikumari/test:v1 .'
-                sh 'cd docker && docker push chandanikumari/test'
+                sh 'cd docker && sudo docker build -t chandanikumari/test:v1 .'
+                sh 'cd docker && sudo docker push chandanikumari/test'
             }
         }
     }
