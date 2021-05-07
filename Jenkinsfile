@@ -14,19 +14,21 @@ pipeline {
         }
     stage('Building image') {
       steps{
-          
-            sh 'cd docker && docker build -t registry .'
+          script {
+          dockerImage = docker.build registry
+        }
+          //  sh 'cd docker && docker build -t registry .'
         }
       }
     
     stage('Deploy Image') {
       steps{
-        /*script {
+        script {
           docker.withRegistry('https://hub.docker.com',registryCredential) {
                 dockerImage.push()
                 }
-            }*/
-            sh 'docker push chandanikumari/test'
+            }
+           // sh 'docker push chandanikumari/test'
         }
     }      
   }
