@@ -21,11 +21,12 @@ pipeline {
     
     stage('Deploy Image') {
       steps{
-        script {
+        /*script {
           docker.withRegistry('https://hub.docker.com',registryCredential) {
                 dockerImage.push()
                 }
-            }
+            }*/
+            sh 'docker push chandanikumari/test'
         }
     }      
   }
