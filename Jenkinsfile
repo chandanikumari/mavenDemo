@@ -11,7 +11,7 @@ pipeline {
 		        sh 'cd my-app && mvn package'
 		        sh 'cd my-app && java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App'
             }
-        }*/
+        }
     stage('Building image') {
       steps{
           script {
@@ -19,12 +19,13 @@ pipeline {
         }
           //  sh 'cd docker && docker build -t registry .'
         }
-      }
+      }*/
     
     stage('Deploy Image') {
       steps{
         script {
           docker.withRegistry('https://hub.docker.com',registryCredential) {
+                def dockerImage = docker.build("test")
                 dockerImage.push()
                 }
             }
