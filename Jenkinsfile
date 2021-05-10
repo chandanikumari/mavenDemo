@@ -50,7 +50,7 @@ node {
         sh 'echo "GIT COMMIT"'
         shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
         echo shortCommit
-        app.push("${env.BUILD_NUMBER}:${shortCommit}") 
+        app.push("${shortCommit}") 
         //echo "${env.GIT_PREVIOUS_COMMIT}"
         //app.push("${env.GIT_COMMIT}")           
         //app.push ("latest")        
