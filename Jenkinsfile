@@ -39,8 +39,6 @@ node {
     def app
     stage('Build image') {         
         app = docker.build("chandanikumari/test")   
-        sh 'echo GIT COMMIT'
-        sh echo "${env.GIT_COMMIT}" 
     }
     stage('Test image') {           
         app.inside {            
@@ -49,8 +47,10 @@ node {
     }          
     stage('Push image') {
         docker.withRegistry('', 'dockerhub') {            
-        app.push("${env.BUILD_NUMBER}")            
-        app.push("latest")        
+        app.push("${env.BUILD_NUMBER}") 
+        sh 'echo GIT COMMIT'
+        app.push("${env.GIT_COMMIT}")           
+        app.push ("latest")        
         }    
     }
 }
