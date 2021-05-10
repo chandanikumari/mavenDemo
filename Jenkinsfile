@@ -38,7 +38,8 @@
 node { 
     def app
     stage('Build image') {         
-        app = docker.build("chandanikumari/test")    
+        app = docker.build("chandanikumari/test")   
+        sh echo "${env.GIT_COMMIT}" 
     }
     stage('Test image') {           
         app.inside {            
