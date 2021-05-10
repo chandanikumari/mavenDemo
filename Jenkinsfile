@@ -37,6 +37,10 @@
 // }
 node { 
     def app
+    stage('Clone repository') {
+        //Let's make sure we have the repository cloned to our workspace
+        checkout scm
+    }
     stage('Build image') {         
         app = docker.build("chandanikumari/test")   
     }
@@ -48,12 +52,13 @@ node {
     stage('Push image') {
         docker.withRegistry('', 'dockerhub') {            
         sh 'echo "GIT COMMIT"'
-        //shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+        shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+        tag = (shortCommit:${env.BUILD_NUMBER})
         //echo shortCommit
         //app.push("${shortCommit}") 
         //echo "${env.GIT_PREVIOUS_COMMIT}"
-        //app.push("${env.GIT_COMMIT}")           
-        app.push("")     
+        //app.push("${env.BUILD_ID}")           
+        app.push(tag)
         }    
     }
-}
+} 
