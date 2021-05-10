@@ -53,7 +53,7 @@ node {
         //app.push("${shortCommit}") 
         //echo "${env.GIT_PREVIOUS_COMMIT}"
         //app.push("${env.GIT_COMMIT}")           
-        app.push        
+        app.push(latest)     
         }    
     }
 }
