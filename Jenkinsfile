@@ -53,12 +53,11 @@ node {
         docker.withRegistry('', 'dockerhub') {            
         sh 'echo "GIT COMMIT"'
         shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
-        tag = (shortCommit:${env.BUILD_NUMBER})
         //echo shortCommit
-        //app.push("${shortCommit}") 
+        app.push("${shortCommit}") 
         //echo "${env.GIT_PREVIOUS_COMMIT}"
-        //app.push("${env.BUILD_ID}")           
-        app.push(tag)
+        app.push("${env.BUILD_ID}")   
+        app.push("latest")        
         }    
     }
 } 
