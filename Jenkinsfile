@@ -47,7 +47,7 @@ node {
     }          
     stage('Push image') {
         docker.withRegistry('', 'dockerhub') {            
-        echo GIT COMMIT
+        sh 'echo "GIT COMMIT"'
         shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
         echo shortCommit
         app.push("${env.BUILD_NUMBER}:${env.shortCommit}") 
