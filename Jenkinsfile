@@ -49,7 +49,8 @@ node {
         docker.withRegistry('', 'dockerhub') {            
         app.push("${env.BUILD_NUMBER}") 
         sh 'echo GIT COMMIT'
-        app.push("${env.GIT_COMMIT}")           
+        sh 'echo (${env.GIT_PREVIOUS_COMMIT})'
+        //app.push("${env.GIT_COMMIT}")           
         app.push ("latest")        
         }    
     }
