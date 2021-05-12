@@ -43,9 +43,10 @@ node {
     }
     stage('Build image') {  
         //sh 'echo $PATH' 
-        mvn package      
+        sh 'mvn package'      
         app = docker.build("chandanikumari/test")   
     }
+
     stage('Test image') {           
         app.inside {            
              sh 'echo "Tests passed"'        
