@@ -53,7 +53,7 @@ node {
         }    
     }  */        
     stage('Push image') {
-        docker.withRegistry('', 'dockerhub') {            
+        docker.withRegistry(' ', 'dockerhub') {            
         sh 'echo "GIT COMMIT"'
         shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
         //echo shortCommit
