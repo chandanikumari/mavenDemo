@@ -47,11 +47,11 @@ node {
         app = docker.build("chandanikumari/test")   
     }
 
-    stage('Test image') {           
+    /*stage('Test image') {           
         app.inside {            
              sh 'echo "Tests passed"'        
         }    
-    }          
+    }  */        
     stage('Push image') {
         docker.withRegistry('', 'dockerhub') {            
         sh 'echo "GIT COMMIT"'
