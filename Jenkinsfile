@@ -37,10 +37,7 @@
 // }
 /*node { 
     def app
-    stage('Clone repository') {
-    //     //Let's make sure we have the repository cloned to our workspace
-        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'ba8e46a2-d793-4638-8c83-1a153cebe424', url: 'https://github.com/chandanikumari/mavenDemo.git']]]
-    }
+    
   /*  stage('Build image') {  
         //sh 'echo $PATH' 
         sh 'mvn package'      
@@ -74,7 +71,7 @@ pipeline {
         stage('Clone repository') {
     //     //Let's make sure we have the repository cloned to our workspace
             checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'ba8e46a2-d793-4638-8c83-1a153cebe424', url: 'https://github.com/chandanikumari/mavenDemo.git']]]
-        }
+    }
         stage('Example Build') {
             agent { docker 'maven:3.8.1-adoptopenjdk-11' } 
             steps {
