@@ -37,12 +37,13 @@
 // }
 node { 
     def app
-    // stage('Clone repository') {
+    stage('Clone repository') {
     //     //Let's make sure we have the repository cloned to our workspace
-    //     checkout([$class: 'GitSCM', branches: [[name: '*/develop']], browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/chandanikumari/mavenDemo/'], extensions: [], userRemoteConfigs: [[credentialsId: 'edffaf1d-dade-4e0b-8af2-b5152f7a926e', url: 'https://github.com/chandanikumari/mavenDemo.git']]])
-    // }
+        checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'ba8e46a2-d793-4638-8c83-1a153cebe424', url: 'https://github.com/chandanikumari/mavenDemo.git']]]
+    }
     stage('Build image') {  
-        sh 'echo $PATH'       
+        //sh 'echo $PATH' 
+        mvn package      
         app = docker.build("chandanikumari/test")   
     }
     stage('Test image') {           
