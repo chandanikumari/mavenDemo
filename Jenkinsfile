@@ -63,11 +63,11 @@
     }
 } */
 pipeline {
-    def app = ''
-    agent any
-    stages { 
+    def app
+    //agent any
         stage('Checkout') {
-            git branch: 'develop', credentialsId: 'ba8e46a2-d793-4638-8c83-1a153cebe424', url: 'https://github.com/chandanikumari/mavenDemo.git'
+            checkout scm
+            //git branch: 'develop', credentialsId: 'ba8e46a2-d793-4638-8c83-1a153cebe424', url: 'https://github.com/chandanikumari/mavenDemo.git'
         }
 
         stage('Build') {
@@ -75,13 +75,12 @@ pipeline {
             // steps {
                 echo 'Hello, Maven'
                 sh 'mvn package'
-                app = docker.build("ananthulasrikar/test")
+                app = docker.build("chandanikumari/test")
         }
 
         stage('Docker push image') {
             docker.withRegistry('', 'dockerhub') {
-                docker.push()
+                docker.push("latest")
             }
         }
-    }
 }
