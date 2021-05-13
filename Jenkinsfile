@@ -63,7 +63,7 @@
     }
 } */
 pipeline {
-    def app
+    def app = ''
     agent any
     stages { 
         stage('Checkout') {
@@ -80,7 +80,7 @@ pipeline {
 
         stage('Docker push image') {
             docker.withRegistry('', 'dockerhub') {
-                app.push()
+                docker.push()
             }
         }
     }
