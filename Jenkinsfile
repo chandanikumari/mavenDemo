@@ -71,19 +71,16 @@ pipeline {
         }
 
         stage('Build') {
-            agent { docker 'maven:3.8.1' } 
-            steps {
+            // agent { docker 'maven:3.8.1' } 
+            // steps {
                 echo 'Hello, Maven'
                 sh 'mvn package'
                 app = docker.build("ananthulasrikar/test")
-            }
         }
-        
+
         stage('Docker push image') {
-            steps {
-               docker.withRegistry('', 'dockerhub') {
-                   app.push()
-               }
+            docker.withRegistry('', 'dockerhub') {
+                app.push()
             }
         }
     }
