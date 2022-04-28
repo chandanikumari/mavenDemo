@@ -9,8 +9,8 @@ pipeline {
 	}
 	stage('Docker'){
 	steps{
-		sh 'docker build . -t ananthulasrikar/chand:latest'
-		sh 'docker push ananthulasrikar/chand:latest'
+		sh 'sudo docker build . -t ananthulasrikar/chand:latest'
+		sh 'sudo docker push ananthulasrikar/chand:latest'
 		}
 		
         }
